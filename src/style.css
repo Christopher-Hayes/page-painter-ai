@@ -1,0 +1,132 @@
+/* Put tailwind utility classes in the end */
+/* only uncomment it if you are using CSS in shadow DOM, otherwise the page styles may be affected.
+@tailwind utilities;
+*/
+
+.style-ai-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #333;
+  color: white;
+  padding: 3em 1em 3em;
+  border-radius: 0.5em;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+  overflow: 'scroll';
+  max-width: 100vw;
+  max-height: 100vh;
+  z-index: 9999999999;
+  align-content: start;
+  justify-content: start;
+  width: 600px;
+  box-shadow: 0 0 2em 0.3em rgb(0 0 0 / 70%);
+}
+.style-ai-panel .drag-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2em;
+  cursor: move;
+  background: #000;
+  opacity: 0.5;
+}
+.style-ai-panel .drag-bar:hver {
+  opacity: 1;
+}
+.style-ai-panel .close-button {
+  color: white;
+  position: absolute;
+  top: 0.3em;
+  right: 0.5em;
+  height: 1.5em;
+  width: 1.5em;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgb(34 34 34);
+  border-radius: 50%;
+  padding: 0;
+}
+.style-ai-panel button {
+  background-color: #2a2a2a;
+  border-radius: 0.5em;
+  color: white;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  transition: background-color 0.2s ease-out;
+}
+.style-ai-panel button:hover,
+.style-ai-panel button:focus {
+  background: #222;
+}
+.style-ai-panel .prompt {
+  background: #222;
+  border-radius: 0.5em 0.5em 0 0;
+  border-bottom: 2px solid #555;
+  color: white;
+  flex-grow: 1;
+  padding: 0.5em 0.5em 0.2em 0.5em;
+}
+.style-ai-panel .ai-result-label,
+.style-ai-panel .utilities-label {
+  width: 100%;
+  font-size: 1em;
+}
+.style-ai-panel .ai-result {
+  width: 100%;
+  max-height: 340px;
+  overflow: auto;
+  background-color: #222;
+  padding: 1em 2em;
+  border-radius: 1em;
+}
+.style-ai-panel .resize-button {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.5em;
+  cursor: nwse-resize;
+  font-weight: bold;
+  background: rgb(34 34 34);
+  border-radius: 5px;
+  color: #ccc;
+}
+.style-ai-panel .mode-selector {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+  width: auto;
+}
+.style-ai-panel .tweak-label {
+  color: #ccc;
+  font-size: 1rem;
+  margin-top: 0.5em;
+  width: 100%;
+}
+.style-ai-panel .tweak-input {
+  background: rgb(34, 34, 34);
+  border-radius: 0.5em 0.5em 0px 0px;
+  border-bottom: 2px solid rgb(85, 85, 85);
+  color: white;
+  flex-grow: 1;
+  padding: 0.5em 0.5em 0.2em;
+}
+/*
+* Add style to head for .ai-hovered-element
+Give it a shadow, a pretty vibrant outline, and slightly scale it up
+This will make it easier to see the element you're hovering over
+*/
+.ai-hovered-element {
+  box-shadow: 0 0 20px #000, 0 0 40px #333, 0 0 60px #999 !important;
+  transform: scale(1.01);
+  outline: 2px solid #f00 !important;
+  border: 2px solid #f00 !important;
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out !important;
+}

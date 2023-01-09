@@ -1,2 +1,21 @@
 # page-painter-ai
-Describe what you want to change and page-painter updates the code of any component of any website. Powered by GPT-3 AI.
+
+AI webpage styling tool. Select a component on a site and tell AI how to change it. AI updates the website and shows the new code.
+
+## Development
+
+```sh
+pnpm dev
+```
+
+## Building
+
+```sh
+pnpm build
+```
+
+## Lint
+
+``` sh
+pnpm lint
+```
