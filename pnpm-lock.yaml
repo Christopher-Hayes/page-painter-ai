@@ -13,7 +13,6 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.2.1
   http-server: ^14.1.1
-  husky: ^8.0.1
   prettier: ^2.7.1
   rollup-plugin-userscript: ^0.1.1
 
@@ -32,7 +31,6 @@ devDependencies:
   del-cli: 5.0.0
   eslint-config-prettier: 8.6.0
   eslint-plugin-prettier: 4.2.1_d3eaczqtcm6x5na45dviosxtl4
-  husky: 8.0.3
   prettier: 2.8.2
   rollup-plugin-userscript: 0.1.1
 
@@ -3191,12 +3189,6 @@ packages:
       - debug
       - supports-color
     dev: false
-
-  /husky/8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dev: true
 
   /iconv-lite/0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}

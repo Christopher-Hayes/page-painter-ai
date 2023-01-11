@@ -1,4 +1,4 @@
-import './app';
+import { Panel, UnselectElementButton, PickElementButton } from './app';
 
 const k = GM_getValue('openai_key', null);
 
@@ -10,83 +10,7 @@ if (!k || k === 'insert_key_here') {
 let mode = 'css';
 let selectedElement = null;
 let selectedElementCSS = null;
-
-const panel = document.createElement('div');
-panel.className = '';
-
-const updateGUIButton = document.createElement('button');
-updateGUIButton.innerText = 'Pick element';
-updateGUIButton.addEventListener('click', () => {
-  startPickElement();
-});
-
-const userPrompt = document.createElement('input');
-userPrompt.type = 'text';
-userPrompt.placeholder = 'Make the background blue..';
-userPrompt.className = 'prompt';
-// on enter key, apply styles
-userPrompt.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') {
-    applyStyles();
-  }
-});
-
-// Add mode selector between 'css', 'tailwind', 'script', and 'html'
-const modeSelector = document.createElement('select');
-modeSelector.classList.add('mode-selector');
-
-const cssOption = document.createElement('option');
-cssOption.value = 'css';
-cssOption.innerText = 'CSS';
-const tailwindOption = document.createElement('option');
-tailwindOption.value = 'tailwind';
-tailwindOption.innerText = 'Tailwind';
-const htmlOption = document.createElement('option');
-htmlOption.value = 'html';
-htmlOption.innerText = 'HTML';
-const scriptOption = document.createElement('option');
-scriptOption.value = 'script';
-scriptOption.innerText = 'Script';
-modeSelector.appendChild(cssOption);
-modeSelector.appendChild(tailwindOption);
-modeSelector.appendChild(htmlOption);
-modeSelector.appendChild(scriptOption);
-
-const applyButton = document.createElement('button');
-applyButton.innerText = 'Run Update';
-applyButton.addEventListener('click', () => {
-  applyStyles();
-});
-
-const copyButton = document.createElement('button');
-copyButton.innerText = 'Copy';
-copyButton.addEventListener('click', () => {
-  copyResult();
-});
-
-const saveButton = document.createElement('button');
-saveButton.innerText = 'Save';
-saveButton.addEventListener('click', () => {
-  saveStyles();
-});
-
-const aiResult = document.createElement('div');
-aiResult.className = 'ai-result';
-
-const aiResultLabel = document.createElement('h3');
-aiResultLabel.innerText = 'Code from AI:';
-aiResultLabel.className = 'ai-result-label';
-
-panel.appendChild(updateGUIButton);
-panel.appendChild(userPrompt);
-panel.appendChild(modeSelector);
-panel.appendChild(applyButton);
-panel.appendChild(aiResultLabel);
-panel.appendChild(aiResult);
-panel.appendChild(copyButton);
-panel.appendChild(saveButton);
-
-document.body.appendChild(panel);
+let lastHoveredElement = null;
 
 function startPickElement() {
   selectedElement = null;
@@ -119,11 +43,15 @@ function startPickElement() {
   }, 500);
 }
 
-let lastHoveredElement = null;
 function onMouseMove(event) {
   const element = document.elementFromPoint(event.clientX, event.clientY);
 
-  if (element && element !== panel) {
+  // Check element exists and the point event.clientX and event.clientY is not contained inside the panel
+  if (
+    element &&
+    !Panel.wrapper.contains(element) &&
+    element !== Panel.wrapper
+  ) {
     // remove the style class from the last hovered element
     if (lastHoveredElement) {
       lastHoveredElement.classList.remove('ai-hovered-element');
@@ -138,7 +66,13 @@ function onMouseMove(event) {
 
 function getElement(event) {
   const element = document.elementFromPoint(event.clientX, event.clientY);
-  if (element && element !== panel) {
+
+  // Check element exists and the point event.clientX and event.clientY is not contained inside the panel
+  if (
+    element &&
+    !Panel.wrapper.contains(element) &&
+    element !== Panel.wrapper
+  ) {
     return element;
   }
 }
@@ -181,7 +115,7 @@ function onMouseClick(event) {
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('click', onMouseClick);
     selectedElement = element;
-    unselectElementButton.style.display = 'block';
+    UnselectElementButton.style.display = 'block';
     selectedElementCSS = selectedElement.style.cssText;
     aiResult.innerText = selectedElementCSS;
   }
